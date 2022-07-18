@@ -2,5 +2,7 @@
 
 # Chatroom Controller
 class ChatroomController < ApplicationController
-  def index; end
+  def index
+    @messages = Message.limit(25)
+  end
 end
