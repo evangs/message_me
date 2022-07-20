@@ -2,6 +2,8 @@
 
 # Sessions Controller
 class SessionsController < ApplicationController
+  before_action :logged_in_redirect, only: %i[new create]
+
   def new; end
 
   def create
@@ -20,5 +22,13 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     flash[:success] = 'Logged out'
     redirect_to login_path
+  end
+
+  private
+
+  def logged_in_redirect
+    return unless logged_in?
+
+    redirect_to root_path
   end
 end
